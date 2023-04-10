@@ -4,12 +4,13 @@
  * @desc 初始化 kiwi 项目的文件以及配置
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.initProject = void 0;
 const path = require("path");
 const fs = require("fs");
 const const_1 = require("./const");
 function creteConfigFile(existDir, type) {
     const configDir = path.resolve(process.cwd(), `./${const_1.KIWI_CONFIG_FILE}`);
-    const config = JSON.stringify(Object.assign({}, const_1.PROJECT_CONFIG.defaultConfig, { kiwiDir: existDir, fileType: type }), null, 2);
+    const config = JSON.stringify(Object.assign(Object.assign({}, const_1.PROJECT_CONFIG.defaultConfig), { kiwiDir: existDir, fileType: type }), null, 2);
     if (existDir && fs.existsSync(existDir) && !fs.existsSync(configDir)) {
         fs.writeFile(configDir, config, err => {
             if (err) {

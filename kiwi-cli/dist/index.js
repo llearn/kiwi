@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -51,7 +52,7 @@ commander
     .option('--prefix [prefix]', '指定替换中文文案前缀')
     .parse(process.argv);
 if (commander.init) {
-    (() => __awaiter(this, void 0, void 0, function* () {
+    (() => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield inquirer.prompt({
             type: 'confirm',
             name: 'confirm',
@@ -59,7 +60,7 @@ if (commander.init) {
             message: '项目中是否已存在kiwi相关目录？'
         });
         if (!result.confirm) {
-            spining('初始化项目', () => __awaiter(this, void 0, void 0, function* () {
+            spining('初始化项目', () => __awaiter(void 0, void 0, void 0, function* () {
                 if (['js', 'ts'].includes(commander.init)) {
                     init_1.initProject(void 0, commander.init);
                 }
@@ -78,7 +79,7 @@ if (commander.init) {
                 name: 'dir',
                 message: '请输入相关目录：'
             });
-            spining('初始化项目', () => __awaiter(this, void 0, void 0, function* () {
+            spining('初始化项目', () => __awaiter(void 0, void 0, void 0, function* () {
                 if (['js', 'ts'].includes(commander.init)) {
                     init_1.initProject(value.dir, commander.init);
                 }
@@ -125,7 +126,7 @@ if (commander.unused) {
     });
 }
 if (commander.mock) {
-    sync_1.sync(() => __awaiter(this, void 0, void 0, function* () {
+    sync_1.sync(() => __awaiter(void 0, void 0, void 0, function* () {
         const { pass, origin } = yield utils_1.getTranslateOriginType();
         if (pass) {
             const spinner = ora(`使用 ${origin} 翻译中...`).start();
@@ -135,7 +136,7 @@ if (commander.mock) {
     }));
 }
 if (commander.translate) {
-    sync_1.sync(() => __awaiter(this, void 0, void 0, function* () {
+    sync_1.sync(() => __awaiter(void 0, void 0, void 0, function* () {
         const { pass, origin } = yield utils_1.getTranslateOriginType();
         if (pass) {
             const spinner = ora(`使用 ${origin} 翻译中...`).start();
